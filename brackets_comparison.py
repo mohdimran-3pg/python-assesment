@@ -48,7 +48,7 @@ def startBracketsComparison(brackets):
 		print("Congratulations Brackets matched")
 
 
-brackets = "{}(>[][])"
+brackets = "{(<>[[[])]"
 startBracketsComparison(brackets)		
 
 
