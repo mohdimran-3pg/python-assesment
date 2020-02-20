@@ -1,34 +1,28 @@
-import os
-import glob
-
-def getNumberofLines(totalLines):
-	
-	contentCounter = 0
-	lines = ""
-	while contentCounter < totalLines:
-		lines = lines + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\n"
-		contentCounter += 1
-
-	return lines	
-
-
-def createMultipleFiles():
+def splitMultipleFiles():
 	
 	numberofLines = int(input("Please enter number of lines:"))
-	userFilename = str(input("Please enter file name:"))
+	userFilename = ""
+	file = ""
+	while True:
+		try:
+			userFilename = str(input("Please enter file name:"))
+			filename = f"dummyFiles/{userFilename}.txt"
+			with open(filename, "r") as file:
+				noOfLinesCnt = 0
+				loop = 1
+				for line in file:
 
-	fileCounter = 0
-	while fileCounter < 3:
-		fileCounter += 1
-		filename = f"dummyFiles/{fileCounter}-{userFilename}"
-		fileContent = "This is content"
-		file = open(filename, "w+")
-		file.write(getNumberofLines(numberofLines))
+					if noOfLinesCnt >= numberofLines:
+						loop += 1
+						noOfLinesCnt = 0
+						
+					newfilename = f"dummyFiles/{(loop)}-{userFilename}.txt"
+					newFile = open(newfilename, "a+")
+					newFile.write(line)
+					noOfLinesCnt += 1
+		except FileNotFoundError:
+			print("There is no file, please try again")
+		else:
+			break
 
-
-
-createMultipleFiles()		
-
-
-		
-
+splitMultipleFiles()
