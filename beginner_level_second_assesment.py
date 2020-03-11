@@ -31,11 +31,11 @@ class WebSiteRunning:
 		sender = 'no-reply@3pillarglobal.com'
 		receivers = ['imran.gnit@gmail.com']
 
-		message = """From: From Person <cronjob@3pillarglobal.com>
-		To: To Person <to@todomain.com>
-		Subject: SMTP e-mail test
+		message = """From: Cron Job <cronjob@3pillarglobal.com>
+		To: mohd imran <imran.gnit@gmail.com>
+		Subject: Cron Job Failed
 
-		This is a test e-mail message.
+		The website {self.website} is not running, kindly look into this.
 		"""
 
 		try:
