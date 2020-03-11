@@ -1,56 +1,63 @@
 
 import re
 
-def is16Length(creditcardnumber):
-	if len(creditcardnumber.replace("-", "")) > 16:
-		return False
-	else:
-		return True
+class creditCardValidator:
 
-def checkCreditCardStartandDigitValidation(creditcardnumber):
 
-	regex = r"^[4-6][0-9-]*$"
-
-	matches = re.search(regex, creditcardnumber)
-
-	if matches:
-		return True
-	else:
-		return False
-
-def checkDuplicateDigits(creditcardnumber):
-
-	arrCreditCardNumber = list(creditcardnumber.replace("-",""))
-	counter = 0
-	occurance = 0
-	last_char = arrCreditCardNumber[0]
-	while counter < len(arrCreditCardNumber):
-
-		if last_char == arrCreditCardNumber[counter]:
-			occurance += 1
+	def is16Length(self, creditcardnumber):
+		if len(creditcardnumber.replace("-", "")) == 16:
+			return True
 		else:
-			occurance = 1	
+			return False
 
-		if occurance == 4:
-			occurance = 1
-			return False	
+	def checkCreditCardStartandDigitValidation(self, creditcardnumber):
 
-		if arrCreditCardNumber[counter] == "-":
-			if (counter != 4 and counter != 9 and counter != 14):
-				return False
+		regex = r"^[4-6][0-9-]*$"
 
-		last_char = arrCreditCardNumber[counter]		
-		counter += 1		
+		matches = re.search(regex, creditcardnumber)
 
-def isValidCreditCard(credit_card):
+		if matches:
+			return True
+		else:
+			return False
 
-	if is16Length(credit_card) == False:
-		print("Invalid Credit Card 1")
-	elif checkCreditCardStartandDigitValidation(credit_card) == False:
-		print("Invalid Credit Card 2")
-	elif checkDuplicateDigits(credit_card) == False:
-		print("Invalid Credit Card 3")
-	else:
-		print("valid credit card")
-	
-isValidCreditCard("5114-4447-8901-0985")
+	def checkDuplicateDigits(self, creditcardnumber):
+
+		arrCreditCardNumber = list(creditcardnumber.replace("-",""))
+		counter = 0
+		occurance = 0
+		last_char = arrCreditCardNumber[0]
+		while counter < len(arrCreditCardNumber):
+
+			if last_char == arrCreditCardNumber[counter]:
+				occurance += 1
+			else:
+				occurance = 1	
+
+			if occurance == 4:
+				occurance = 1
+				return False	
+
+			if arrCreditCardNumber[counter] == "-":
+				if (counter != 4 and counter != 9 and counter != 14):
+					return False
+
+			last_char = arrCreditCardNumber[counter]		
+			counter += 1
+		return True			
+
+	def isValidCreditCard(self, credit_card):
+
+		if self.is16Length(credit_card) == False:
+			return f"{credit_card} is Invalid Credit Card"
+		elif self.checkCreditCardStartandDigitValidation(credit_card) == False:
+			return f"{credit_card} is Invalid Credit Card"
+		elif self.checkDuplicateDigits(credit_card) == False:
+			return f"{credit_card} is Invalid Credit Card"
+		else:
+			return f"{credit_card} is Valid Credit Card"
+
+
+objCCValidator = creditCardValidator()
+credit_card = "4114-4247-8901-0985"	
+print(objCCValidator.isValidCreditCard(credit_card))
